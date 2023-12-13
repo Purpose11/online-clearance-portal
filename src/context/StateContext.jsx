@@ -4,7 +4,7 @@ const ClearanceContext = createContext();
 
 // Context Provider component
 export const ClearanceProvider = ({ children }) => {
-  const [id, setId] = useState("ST1102");
+  const [id, setId] = useState("");
   const [step1, setStep1] = useState({
     department: "",
     level: "",
