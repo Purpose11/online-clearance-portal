@@ -7,6 +7,7 @@ import twitter from "../assets/images/twitter.png";
 import facebook from "../assets/images/facebook.png";
 import linkedin from "../assets/images/linkedin.png";
 import ogitech from "../assets/images/ogitech.png";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
@@ -89,10 +90,11 @@ const Nav = () => {
               <AiOutlineCaretDown className="text-sm flex-shrink-0" />
             </span>
           </h3>
-
-          <button className="bg-secondary rounded h-[50px] w-[150px] cursor-pointer">
-            Staff Webmail
-          </button>
+          <Link to="/">
+            <button className="bg-secondary rounded h-[50px] w-[150px] cursor-pointer">
+              Login
+            </button>
+          </Link>
         </div>
       </div>
     </>

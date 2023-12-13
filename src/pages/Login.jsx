@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import ClearanceContext from "../../src/context/StateContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { id, setId } = useContext(ClearanceContext);
   const [logInAs, setLogInAs] = useState("Admin");
-  const [id, setId] = useState("");
+
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const isFormValid = id !== "" && password !== "";
@@ -18,6 +20,13 @@ const Login = () => {
     if (id === "ST1102" && password === "student" && logInAs === "Admin") {
       alert("Login Sucessful!");
       navigate(`/student/${id}`);
+    } else if (
+      id === "AD1102" &&
+      password === "admin" &&
+      logInAs === "Student"
+    ) {
+      alert("Login Sucessful!");
+      navigate("/admin_dashboard");
     } else {
       alert("Login Failed!");
     }

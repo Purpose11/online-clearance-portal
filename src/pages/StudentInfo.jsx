@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { BiSolidUser } from "react-icons/bi";
 import { FaUpload } from "react-icons/fa6";
 import { TbLayersSubtract } from "react-icons/tb";
+import ClearanceContext from "../../src/context/StateContext";
 
 const StudentInfo = () => {
+  const { isClearanceDone, uploadedImage, setUploadedImage } =
+    useContext(ClearanceContext);
   const { id } = useParams();
-  const [uploadedImage, setUploadedImage] = useState(null);
 
   // Function to handle image upload
   const handleImageUpload = (event) => {
@@ -15,6 +17,7 @@ const StudentInfo = () => {
 
     reader.onloadend = () => {
       setUploadedImage(reader.result);
+      localStorage.setItem("uploadedImage", reader.result);
     };
 
     if (file) {
@@ -96,11 +99,19 @@ const StudentInfo = () => {
             </div>
           </div>
 
-          <Link to="/clearance">
-            <button className="mt-5 w-[200px] h-[40px] bg-main text-white cursor-pointer rounded capitalize text-base">
-              start clearance
-            </button>
-          </Link>
+          {isClearanceDone ? (
+            <Link to="/clearance_status">
+              <button className="mt-5 w-[200px] h-[40px] bg-main text-white cursor-pointer rounded capitalize text-base">
+                Check Clearance Status
+              </button>
+            </Link>
+          ) : (
+            <Link to="/clearance">
+              <button className="mt-5 w-[200px] h-[40px] bg-main text-white cursor-pointer rounded capitalize text-base">
+                start clearance
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </>
